@@ -45,5 +45,21 @@ public class ToDoController {
         return new ResponseEntity<>(toDoService.readAll(principal.getName()), HttpStatus.OK);
     }
 
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/api/auth/count")
+    public ResponseEntity<CountResponse> countAll(Principal principal, @RequestParam(required = false) String isCompleted) {
+        if (isCompleted != null) {
+            return new ResponseEntity<>(toDoService.countAllByIsCompleted(principal.getName(), isCompleted), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(toDoService.countAll(principal.getName()), HttpStatus.OK);
+    }
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/api/auth/{pageNumber}/{pageSize}")
+    public ResponseEntity<List<ToDo>> readAllPageable(Principal principal, @PathVariable String pageNumber, @PathVariable String pageSize, @RequestParam(required = false) String isCompleted) {
+        if (isCompleted != null) {
+            return new ResponseEntity<>(toDoService)
+        }
+    }
 
 }
